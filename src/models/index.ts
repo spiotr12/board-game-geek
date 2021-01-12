@@ -5,6 +5,6 @@ export * from './bgg-game.model';
 export * from './bgg-link.model';
 export * from './bgg-name.model';
 export * from './bgg-poll.model';
-export * from './bgg-thing.model';
+export * from './bgg-thing-attributes.interface';
 export * from './bgg-version.model';
 export * from './bgg-response.model';

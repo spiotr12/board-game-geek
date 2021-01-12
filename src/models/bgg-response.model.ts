@@ -1,6 +1,5 @@
 import { IAttributes } from './attributes.interface';
 import { BggGame, IBggItem } from './bgg-game.model';
-import { BggThing } from '@bgg/models/bgg-thing.model';
 import { BggAccessory } from '@bgg/models/bgg-accessory.model';
 
 /**
@@ -19,7 +18,7 @@ export interface IBggResponse {
 
 export class BggResponse {
   public type: BggThingType;
-  public item?: BggThing;
+  public item?: BggGame | BggAccessory;
 
   constructor(data: IBggResponse) {
     this.type = data.items.item._attributes.type as BggThingType;
