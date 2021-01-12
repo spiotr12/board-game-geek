@@ -1,14 +1,17 @@
 {
   "name": "@code-bucket/board-game-geek",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Library that supports board game geek XML2API",
+  "author": "Piotr Starzec (starzec.piotr.12@gmail.com",
+  "license": "ISC",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
+    "eslint": "^7.17.0",
     "typescript": "^4.1.3"
   }
 }
