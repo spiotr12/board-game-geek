@@ -6,7 +6,7 @@
   "license": "ISC",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --project tsconfig.build.json"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.13.0",
