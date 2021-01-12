@@ -1,5 +1,5 @@
 import { IAttributes } from './attributes.interface';
-import { BggItem, IBggItem } from './bgg-item.model';
+import { BggGame, IBggItem } from './bgg-game.model';
 import { BggThing } from '@bgg/models/bgg-thing.model';
 import { BggAccessory } from '@bgg/models/bgg-accessory.model';
 
@@ -24,7 +24,7 @@ export class BggResponse {
   constructor(data: IBggResponse) {
     this.type = data.items.item._attributes.type as BggThingType;
     if (this.type === BggThingType.boardGame) {
-      this.item = new BggItem(data.items.item);
+      this.item = new BggGame(data.items.item);
     } else if (this.type === BggThingType.boardGameAccessory) {
       this.item = new BggAccessory(data.items.item);
     }

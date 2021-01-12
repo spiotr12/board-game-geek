@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { parseXmlApi2BggResponse } from './parse-xml-api2-bgg-response';
-import { BggAccessory, BggItem, BggResponse } from '@bgg/models';
+import { BggAccessory, BggGame, BggResponse } from '@bgg/models';
 
 describe('parseXmlApi2BggResponse', () => {
   it('board game', async () => {
@@ -15,7 +15,7 @@ describe('parseXmlApi2BggResponse', () => {
     expect(bggResponse).toBeDefined();
     expect(bggResponse).toBeInstanceOf(BggResponse);
     expect(bggResponse?.type).toEqual('boardgame');
-    expect(bggResponse?.item).toBeInstanceOf(BggItem);
+    expect(bggResponse?.item).toBeInstanceOf(BggGame);
   });
 
   it('board game expansion', async () => {

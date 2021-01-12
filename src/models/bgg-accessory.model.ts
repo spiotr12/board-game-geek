@@ -1,4 +1,3 @@
-import { BggPoll, IBggPoll } from './bgg-poll.model';
 import { BggVersion, IBggVersion } from './bgg-version.model';
 import { BggThing, IBggThing } from './bgg-thing.model';
 

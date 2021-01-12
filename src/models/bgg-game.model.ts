@@ -15,7 +15,7 @@ export interface IBggItem extends IBggThing {
   versions?: { item: IBggVersion[] | IBggVersion }
 }
 
-export class BggItem extends BggThing {
+export class BggGame extends BggThing {
   public description: string;
   public minplayers: number;
   public maxplayers: number;
