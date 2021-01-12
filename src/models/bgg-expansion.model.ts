@@ -5,7 +5,7 @@ import { IBggThingAttributes } from './bgg-thing-attributes.interface';
 import { BggLink, IBggLink } from './bgg-link.model';
 import { BggName, IBggName } from './bgg-name.model';
 
-export interface IBggGame extends IAttributes<IBggThingAttributes> {
+export interface IBggExpansion extends IAttributes<IBggThingAttributes> {
   thumbnail: { _text: string };
   image: { _text: string };
   name: IBggName[] | IBggName;
@@ -22,7 +22,7 @@ export interface IBggGame extends IAttributes<IBggThingAttributes> {
   versions: { item: IBggVersion[] | IBggVersion }
 }
 
-export class BggGame {
+export class BggExpansion {
   public id: number;
   public type: string;
   public thumbnail: string;
@@ -45,7 +45,7 @@ export class BggGame {
 
   public get nameValue(): string | undefined { return this.names[0]?.value; }
 
-  constructor(data: IBggGame) {
+  constructor(data: IBggExpansion) {
     this.id = Number.parseInt(data._attributes.id);
     this.type = data._attributes.type;
     this.thumbnail = data.thumbnail._text.trim();

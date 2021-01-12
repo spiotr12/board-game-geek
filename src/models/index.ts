@@ -1,6 +1,7 @@
 export * from './attributes.interface';
 export * from './bgg.type';
 export * from './bgg-accessory.model';
+export * from './bgg-expansion.model';
 export * from './bgg-game.model';
 export * from './bgg-link.model';
 export * from './bgg-name.model';
