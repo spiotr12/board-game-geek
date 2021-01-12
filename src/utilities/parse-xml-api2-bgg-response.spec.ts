@@ -49,31 +49,31 @@ describe('parseXmlApi2BggResponse', () => {
     expect(bggResponse?.item).toBeInstanceOf(BggAccessory);
   });
 
-  describe.skip('test all', async () => {
-    const limit = 5000;
-
-    for (let i = 1; i < limit; i++) {
-      const id = i;
-
-      it(`test id ${id}`, async () => {
-        // Arrange
-        const response = await axios.get(getBggUrl(id));
-
-        try {
-          // Act
-          const bggResponse = parseXmlApi2BggResponse(response.data);
-          console.log(bggResponse);
-
-          // Assert
-          if (bggResponse !== null) {
-            expect(bggResponse).toBeDefined();
-            expect(bggResponse).toBeInstanceOf(BggResponse);
-          }
-        } catch (e) {
-          console.log(e);
-          throw e;
-        }
-      });
-    }
-  });
+  // describe.skip('test all', async () => {
+  //   const limit = 5000;
+  //
+  //   for (let i = 1; i < limit; i++) {
+  //     const id = i;
+  //
+  //     it(`test id ${id}`, async () => {
+  //       // Arrange
+  //       const response = await axios.get(getBggUrl(id));
+  //
+  //       try {
+  //         // Act
+  //         const bggResponse = parseXmlApi2BggResponse(response.data);
+  //         console.log(bggResponse);
+  //
+  //         // Assert
+  //         if (bggResponse !== null) {
+  //           expect(bggResponse).toBeDefined();
+  //           expect(bggResponse).toBeInstanceOf(BggResponse);
+  //         }
+  //       } catch (e) {
+  //         console.log(e);
+  //         throw e;
+  //       }
+  //     });
+  //   }
+  // });
 });
