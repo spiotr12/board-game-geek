@@ -1,0 +1,17 @@
+# XML 2 API
+
+### Get thing
+
+# id is required
+# version is required to load versions of this thing
+
+GET {{bggHost}}/xmlapi2/thing?id=169786&versions=1
+
+### Search
+
+# query is required
+# type is optional
+
+GET {{bggHost}}/xmlapi2/search?query=scythe&type=boardgame
+
+###
