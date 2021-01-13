@@ -1,8 +1,8 @@
 import { BggVersion, IBggVersion } from './bgg-version.model';
 import { IBggThingAttributes } from './bgg-thing-attributes.interface';
-import { IAttributes } from '@bgg/models/attributes.interface';
-import { BggLink, IBggLink } from '@bgg/models/bgg-link.model';
-import { BggName, IBggName } from '@bgg/models/bgg-name.model';
+import { IAttributes } from './attributes.interface';
+import { BggLink, IBggLink } from './bgg-link.model';
+import { BggName, IBggName } from './bgg-name.model';
 
 export interface IBggAccessory extends IAttributes<IBggThingAttributes> {
   thumbnail?: { _text: string };

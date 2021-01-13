@@ -1,5 +1,5 @@
 import { xml2js } from 'xml-js';
-import { BggResponse, IBggResponse } from '@bgg/models';
+import { BggResponse, IBggResponse } from '../models';
 
 /**
  * Parses the http response body from BGG XML API 2
