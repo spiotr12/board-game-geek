@@ -7,9 +7,22 @@ export type IBggLink = IAttributes<{
   inbound?: string;
 }>;
 
+export enum BggLinkType {
+  boardGameCategory = 'boardgamecategory',
+  boardGameMechanic = 'boardgamemechanic',
+  boardGameFamily = 'boardgamefamily',
+  boardGameExpansion = 'boardgameexpansion',
+  boardGameImplementation = 'boardgameimplementation',
+  boardGameDesigner = 'boardgamedesigner',
+  boardGameArtist = 'boardgameartist',
+  boardGamePublisher = 'boardgamepublisher',
+  boardGameVersion = 'boardgameversion',
+  language = 'language',
+}
+
 export class BggLink {
   public id: number;
-  public type: string;
+  public type: BggLinkType | string;
   public value: string;
   public inbound?: boolean;
 
