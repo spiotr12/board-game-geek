@@ -1,6 +1,6 @@
 {
   "name": "@code-bucket/board-game-geek",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Library that supports board game geek XMLAPI2",
   "license": "ISC",
   "author": "Piotr Starzec",
@@ -14,6 +14,7 @@
   "homepage": "https://github.com/spiotr12/board-game-geek#readme",
   "files": [
     "index.js",
+    "index.d.ts",
     "dist/**/*"
   ],
   "scripts": {
