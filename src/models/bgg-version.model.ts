@@ -1,6 +1,6 @@
 import { IAttributes } from './attributes.interface';
 import { IBggThingAttributes } from './bgg-thing-attributes.interface';
-import { BggLink, IBggLink } from './bgg-link.model';
+import { BggLink, BggLinkType, IBggLink } from './bgg-link.model';
 import { BggName, IBggName } from './bgg-name.model';
 
 export interface IBggVersion extends IAttributes<IBggThingAttributes> {
@@ -31,9 +31,49 @@ export class BggVersion {
   public weight?: number;
 
   // Getters
-  public get name(): BggName | undefined { return this.names[0]; }
+  public get name(): BggName | undefined {
+    return this.names[0];
+  }
 
-  public get nameValue(): string | undefined { return this.names[0]?.value; }
+  public get nameValue(): string | undefined {
+    return this.names[0]?.value;
+  }
+
+  public get category(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGameCategory)?.value;
+  }
+
+  public get mechanic(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGameMechanic)?.value;
+  }
+
+  public get family(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGameFamily)?.value;
+  }
+
+  public get expansion(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGameExpansion)?.value;
+  }
+
+  public get implementation(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGameImplementation)?.value;
+  }
+
+  public get designer(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGameDesigner)?.value;
+  }
+
+  public get artist(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGameArtist)?.value;
+  }
+
+  public get publisher(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.boardGamePublisher)?.value;
+  }
+
+  public get language(): string | undefined {
+    return this.links.find(l => l.type === BggLinkType.language)?.value;
+  }
 
   constructor(data: IBggVersion) {
     this.id = Number.parseInt(data._attributes.id);
