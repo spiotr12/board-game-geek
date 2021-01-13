@@ -6,8 +6,14 @@ export type IBggName = IAttributes<{
   value: string;
 }>
 
-export type BggNameType = 'primary' | 'alternate';
+export enum BggNameType {
+  primary = 'primary',
+  alternate = 'alternate'
+}
 
+/**
+ * Parsed name from bgg xml data
+ */
 export class BggName {
   public value: string;
   public type: BggNameType;

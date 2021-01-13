@@ -2,8 +2,8 @@ import { IAttributes } from './attributes.interface';
 import { BggPoll, IBggPoll } from './bgg-poll.model';
 import { BggVersion, IBggVersion } from './bgg-version.model';
 import { IBggThingAttributes } from './bgg-thing-attributes.interface';
-import { BggLink, IBggLink } from './bgg-link.model';
-import { BggName, IBggName } from './bgg-name.model';
+import { BggLink, BggLinkType, IBggLink } from './bgg-link.model';
+import { BggName, BggNameType, IBggName } from './bgg-name.model';
 
 export interface IBggExpansion extends IAttributes<IBggThingAttributes> {
   thumbnail: { _text: string };
@@ -24,7 +24,7 @@ export interface IBggExpansion extends IAttributes<IBggThingAttributes> {
 
 export class BggExpansion {
   public id: number;
-  public type: string;
+  public type: 'boardgameexpansion' | string;
   public thumbnail: string;
   public image: string;
   public links: BggLink[];
@@ -40,10 +40,48 @@ export class BggExpansion {
   public minage: number;
   public versions: BggVersion[];
 
-  // Getters
-  public get name(): BggName | undefined { return this.names[0]; }
 
-  public get nameValue(): string | undefined { return this.names[0]?.value; }
+  // Getters
+
+  public get namesValues(): string[] {
+    return this.names.map(name => name.value);
+  }
+
+  public get primaryName(): string | undefined {
+    return this.names.find(name => name.type === BggNameType.primary)?.value;
+  }
+
+  public get expansionFor(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGameExpansion);
+  }
+
+  public get categories(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGameCategory);
+  }
+
+  public get mechanics(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGameMechanic);
+  }
+
+  public get families(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGameFamily);
+  }
+
+  public get expansions(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGameExpansion);
+  }
+
+  public get designers(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGameDesigner);
+  }
+
+  public get artists(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGameArtist);
+  }
+
+  public get publishers(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGamePublisher);
+  }
 
   constructor(data: IBggExpansion) {
     this.id = Number.parseInt(data._attributes.id);

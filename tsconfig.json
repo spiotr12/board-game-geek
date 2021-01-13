@@ -14,7 +14,8 @@
     // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     /* Generates corresponding '.d.ts' file. */
     "declaration": true,
-    // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
+    /* Generates a sourcemap for each corresponding '.d.ts' file. */
+    "declarationMap": true,
     /* Generates corresponding '.map' file. */
     "sourceMap": true,
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
@@ -24,7 +25,8 @@
     "rootDir": "./src",
     // "composite": true,                     /* Enable project compilation */
     // "tsBuildInfoFile": "./",               /* Specify file to store incremental compilation information */
-    // "removeComments": true,                /* Do not emit comments to output. */
+    /* Do not emit comments to output. */
+    "removeComments": false,
     // "noEmit": true,                        /* Do not emit outputs. */
     // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */
     // "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */

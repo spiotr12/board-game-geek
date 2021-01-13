@@ -2,7 +2,7 @@ import { BggVersion, IBggVersion } from './bgg-version.model';
 import { IBggThingAttributes } from './bgg-thing-attributes.interface';
 import { IAttributes } from './attributes.interface';
 import { BggLink, BggLinkType, IBggLink } from './bgg-link.model';
-import { BggName, IBggName } from './bgg-name.model';
+import { BggName, BggNameType, IBggName } from './bgg-name.model';
 
 export interface IBggAccessory extends IAttributes<IBggThingAttributes> {
   thumbnail?: { _text: string };
@@ -16,7 +16,7 @@ export interface IBggAccessory extends IAttributes<IBggThingAttributes> {
 
 export class BggAccessory {
   public id: number;
-  public type: string;
+  public type: 'boardgameaccessory' | string;
   public thumbnail?: string;
   public image?: string;
   public links: BggLink[];
@@ -26,52 +26,21 @@ export class BggAccessory {
   public versions: BggVersion[];
 
   // Getters
-  public get name(): BggName | undefined {
-    return this.names[0];
+
+  public get namesValues(): string[] {
+    return this.names.map(name => name.value);
   }
 
-  public get nameValue(): string | undefined {
-    return this.names[0]?.value;
+  public get primaryName(): string | undefined {
+    return this.names.find(name => name.type === BggNameType.primary)?.value;
   }
 
-  public get category(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameCategory)?.value;
+  public get publishers(): BggLink[] {
+    return this.links.filter(link => link.type === BggLinkType.boardGamePublisher);
   }
 
-  public get mechanic(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameMechanic)?.value;
-  }
-
-  public get family(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameFamily)?.value;
-  }
-
-  public get expansion(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameExpansion)?.value;
-  }
-
-  public get implementation(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameImplementation)?.value;
-  }
-
-  public get designer(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameDesigner)?.value;
-  }
-
-  public get artist(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameArtist)?.value;
-  }
-
-  public get publisher(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGamePublisher)?.value;
-  }
-
-  public get version(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.boardGameVersion)?.value;
-  }
-
-  public get language(): string | undefined {
-    return this.links.find(l => l.type === BggLinkType.language)?.value;
+  public get accessoryFor(): BggLink | undefined {
+    return this.links.find(link => link.type === BggLinkType.boardGameAccessory);
   }
 
   constructor(data: IBggAccessory) {
