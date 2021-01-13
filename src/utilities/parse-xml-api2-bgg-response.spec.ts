@@ -5,7 +5,7 @@ import { BggAccessory, BggExpansion, BggGame, BggResponse } from '@bgg/models';
 const getBggUrl = (id: number) => `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
 
 describe('parseXmlApi2BggResponse', () => {
-  it('sandbox', async () => {
+  it.skip('sandbox', async () => {
     // Arrange
     const bggId = 234757;
     const response = await axios.get(getBggUrl(bggId));
