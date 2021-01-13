@@ -17,7 +17,6 @@
     "index.d.ts",
     "dist/**/*"
   ],
-  "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "test": "jest",
