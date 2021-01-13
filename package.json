@@ -1,6 +1,6 @@
 {
   "name": "@code-bucket/board-game-geek",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Library that supports board game geek XMLAPI2",
   "license": "ISC",
   "author": "Piotr Starzec",
@@ -17,6 +17,7 @@
     "index.d.ts",
     "dist/**/*"
   ],
+  "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "test": "jest",

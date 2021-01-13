@@ -7,7 +7,7 @@ const getBggUrl = (id: number) => `https://api.geekdo.com/xmlapi2/thing?id=${id}
 describe('parseXmlApi2BggResponse', () => {
   it('sandbox', async () => {
     // Arrange
-    const bggId = 302413;
+    const bggId = 234757;
     const response = await axios.get(getBggUrl(bggId));
 
     // Act
