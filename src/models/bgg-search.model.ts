@@ -1,7 +1,7 @@
 import { IBggThingAttributes } from './bgg-thing-attributes.interface';
 import { IAttributes } from './attributes.interface';
 import { BggThingType } from './bgg-thing.type';
-import { BggNameType, IBggName } from '@bgg/models/bgg-name.model';
+import { BggNameType, IBggName } from './bgg-name.model';
 
 export interface IBggSearch extends IAttributes<IBggThingAttributes> {
   name: IBggName;
