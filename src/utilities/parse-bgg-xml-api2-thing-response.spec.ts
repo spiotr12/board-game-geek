@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { parseBggXmlApi2ThingResponse } from './parse-bgg-xml-api2-thing-response';
-import { BggAccessory, BggExpansion, BggGame, BggResponse } from '@bgg/models';
+import { BggAccessory, BggExpansion, BggGame, BggThingResponse } from '@bgg/models';
 
 const getBggUrl = (id: number) => `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
 
@@ -15,7 +15,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
 
     // Assert
     expect(bggResponse).toBeDefined();
-    expect(bggResponse).toBeInstanceOf(BggResponse);
+    expect(bggResponse).toBeInstanceOf(BggThingResponse);
     expect(bggResponse?.type).toEqual('boardgame');
     expect(bggResponse?.item).toBeInstanceOf(BggGame);
   });
@@ -30,7 +30,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
 
     // Assert
     expect(bggResponse).toBeDefined();
-    expect(bggResponse).toBeInstanceOf(BggResponse);
+    expect(bggResponse).toBeInstanceOf(BggThingResponse);
     expect(bggResponse?.type).toEqual('boardgame');
     expect(bggResponse?.item).toBeInstanceOf(BggGame);
     // Test BggGame Model
@@ -190,7 +190,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
 
     // Assert
     expect(bggResponse).toBeDefined();
-    expect(bggResponse).toBeInstanceOf(BggResponse);
+    expect(bggResponse).toBeInstanceOf(BggThingResponse);
     expect(bggResponse?.type).toEqual('boardgameaccessory');
     expect(bggResponse?.item).toBeInstanceOf(BggAccessory);
     // Test BggAccessory Model
@@ -243,7 +243,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
   //         // Assert
   //         if (bggResponse !== null) {
   //           expect(bggResponse).toBeDefined();
-  //           expect(bggResponse).toBeInstanceOf(BggResponse);
+  //           expect(bggResponse).toBeInstanceOf(BggThingResponse);
   //         }
   //       } catch (e) {
   //         console.log(e);

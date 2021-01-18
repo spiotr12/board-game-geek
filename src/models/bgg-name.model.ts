@@ -2,8 +2,8 @@ import { IAttributes } from './attributes.interface';
 
 export type IBggName = IAttributes<{
   type: BggNameType;
-  sortindex: string;
   value: string;
+  sortindex?: string;
 }>
 
 export enum BggNameType {
@@ -17,7 +17,7 @@ export enum BggNameType {
 export class BggName {
   public value: string;
   public type: BggNameType;
-  public sortindex: string;
+  public sortindex?: string;
 
   constructor(data: IBggName) {
     this.value = data._attributes.value;

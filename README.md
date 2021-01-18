@@ -5,10 +5,20 @@ mapping to response parsed by xml-js package. Classes are mapped and simplified 
 
 ## Usage
 
+Thing
+
 ```typescript
 const response = await axios.get('https://api.geekdo.com/xmlapi2/thing?id=169786&versions=1');
 const bggResponse = parseBggXmlApi2ThingResponse(response);
 const thing = bggResponse.item;
+```
+
+Search
+
+```typescript
+const response = await axios.get('https://api.geekdo.com/xmlapi2/search?query=scythe');
+const bggResponse = parseBggXmlApi2SearchResponse(response);
+const search = bggResponse.items;
 ```
 
 The `thing` can be of 3 different types: `BggGame`, `BggExpansion`, `BggAccessory`.
