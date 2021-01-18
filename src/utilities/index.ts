@@ -1,1 +1,1 @@
-export * from './parse-xml-api2-bgg-response';
+export * from './parse-bgg-xml-api2-thing-response';

@@ -6,7 +6,7 @@ import { BggResponse, IBggResponse } from '../models';
  *
  * @param response
  */
-export const parseXmlApi2BggResponse: (response: string) => BggResponse | null = (response: string) => {
+export const parseBggXmlApi2ThingResponse: (response: string) => BggResponse | null = (response: string) => {
   const data = xml2js(response, { compact: true }) as IBggResponse;
   if (!data.items.item) {
     return null; // Not found

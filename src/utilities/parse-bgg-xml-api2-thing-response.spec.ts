@@ -1,17 +1,17 @@
 import axios from 'axios';
-import { parseXmlApi2BggResponse } from './parse-xml-api2-bgg-response';
+import { parseBggXmlApi2ThingResponse } from './parse-bgg-xml-api2-thing-response';
 import { BggAccessory, BggExpansion, BggGame, BggResponse } from '@bgg/models';
 
 const getBggUrl = (id: number) => `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
 
-describe('parseXmlApi2BggResponse', () => {
+describe('parseBggXmlApi2ThingResponse', () => {
   it.skip('sandbox', async () => {
     // Arrange
     const bggId = 234757;
     const response = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseXmlApi2BggResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -26,7 +26,7 @@ describe('parseXmlApi2BggResponse', () => {
     const response = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseXmlApi2BggResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -107,7 +107,7 @@ describe('parseXmlApi2BggResponse', () => {
     const response = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseXmlApi2BggResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -186,7 +186,7 @@ describe('parseXmlApi2BggResponse', () => {
     const response = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseXmlApi2BggResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -237,7 +237,7 @@ describe('parseXmlApi2BggResponse', () => {
   //
   //       try {
   //         // Act
-  //         const bggResponse = parseXmlApi2BggResponse(response.data);
+  //         const bggResponse = parseBggXmlApi2ThingResponse(response.data);
   //         console.log(bggResponse);
   //
   //         // Assert
