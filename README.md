@@ -5,7 +5,7 @@ mapping to response parsed by xml-js package. Classes are mapped and simplified 
 
 ## Usage
 
-###Thing
+### Thing
 
 ```typescript
 const response = await axios.get('https://api.geekdo.com/xmlapi2/thing?id=169786&versions=1');
@@ -22,7 +22,7 @@ const thing1 = bggResponse.items[0];
 const thing2 = bggResponse.items[1];
 ```
 
-###Search
+### Search
 
 ```typescript
 const response = await axios.get('https://api.geekdo.com/xmlapi2/search?query=scythe');
