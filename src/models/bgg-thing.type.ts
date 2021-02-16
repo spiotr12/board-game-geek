@@ -1,7 +1,8 @@
-import { BggGame } from './bgg-game.model';
-import { BggExpansion } from './bgg-expansion.model';
-import { BggAccessory } from './bgg-accessory.model';
+import { BggGame, IBggGame } from './bgg-game.model';
+import { BggExpansion, IBggExpansion } from './bgg-expansion.model';
+import { BggAccessory, IBggAccessory } from './bgg-accessory.model';
 
+export type IBggThing = IBggGame | IBggExpansion | IBggAccessory;
 export type BggThing = BggGame | BggExpansion | BggAccessory;
 
 /**

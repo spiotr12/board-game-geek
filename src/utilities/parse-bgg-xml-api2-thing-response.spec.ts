@@ -1,16 +1,18 @@
 import axios from 'axios';
 import { parseBggXmlApi2ThingResponse } from './parse-bgg-xml-api2-thing-response';
 import { BggAccessory, BggExpansion, BggGame, BggThingResponse } from '@bgg/models';
+import { xml2js } from 'xml-js';
 
-const getBggUrl = (id: number) => `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
+const getBggUrl = (id: number | string) => `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
 
 describe('parseBggXmlApi2ThingResponse', () => {
-  it.skip('sandbox', async () => {
+  it('sandbox', async () => {
     // Arrange
-    const bggId = 234757;
+    const bggId = '170416,169786';
     const response = await axios.get(getBggUrl(bggId));
 
     // Act
+    const data = xml2js(response.data, { compact: true });
     const bggResponse = parseBggXmlApi2ThingResponse(response.data);
 
     // Assert

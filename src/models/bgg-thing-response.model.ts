@@ -2,26 +2,48 @@ import { IAttributes } from './attributes.interface';
 import { BggGame, IBggGame } from './bgg-game.model';
 import { BggAccessory, IBggAccessory } from './bgg-accessory.model';
 import { BggExpansion, IBggExpansion } from './bgg-expansion.model';
-import { BggThingType } from './bgg-thing.type';
+import { BggThing, BggThingType, IBggThing } from './bgg-thing.type';
 
 export interface IBggThingResponse {
   _declaration: IAttributes<{ version: string, encoding: string }>;
-  items: { item: IBggGame | IBggExpansion | IBggAccessory } & IAttributes<{ termsofuse: string }>
+  items: { item: IBggThing | IBggThing[] } & IAttributes<{ termsofuse: string }>
 }
 
 export class BggThingResponse {
-  public type: BggThingType;
-  public item?: BggGame | BggExpansion | BggAccessory;
+  public items: (BggThing | undefined)[];
+
+  /**
+   * Alias for this.items[0]. Use only if you know there is only one item in response
+   */
+  public get item(): BggThing | undefined {
+    return this.items[0];
+  }
+
+  /**
+   * Alias for this.item.type
+   */
+  public get type(): BggThingType | undefined {
+    return this.item?.type as BggThingType;
+  }
 
   constructor(data: IBggThingResponse) {
-    this.type = data.items.item._attributes.type as BggThingType;
-    if (this.type === BggThingType.boardGame) {
-      this.item = new BggGame(data.items.item as IBggGame);
-    } else if (this.type === BggThingType.boardGameExpansion) {
-      this.item = new BggExpansion(data.items.item as IBggExpansion);
-    } else if (this.type === BggThingType.boardGameAccessory) {
-      this.item = new BggAccessory(data.items.item as IBggAccessory);
+    if (Array.isArray(data.items.item)) {
+      this.items = data.items.item.map(item => this.parseItem(item));
+    } else {
+      this.items = [this.parseItem(data.items.item)];
     }
-    // TODO: Bgg Expansion
+  }
+
+  private parseItem(item: IBggThing) {
+    const type = item._attributes.type as BggThingType;
+
+    switch (type) {
+      case BggThingType.boardGame:
+        return new BggGame(item as IBggGame);
+      case BggThingType.boardGameExpansion:
+        return new BggExpansion(item as IBggExpansion);
+      case BggThingType.boardGameAccessory:
+        return new BggAccessory(item as IBggAccessory);
+    }
   }
 }
