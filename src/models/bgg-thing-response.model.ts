@@ -10,19 +10,19 @@ export interface IBggThingResponse {
 }
 
 export class BggThingResponse {
-  public items: (BggThing | undefined)[];
+  public items: BggThing[];
 
   /**
    * Alias for this.items[0]. Use only if you know there is only one item in response
    */
-  public get item(): BggThing | undefined {
+  public get item(): BggThing {
     return this.items[0];
   }
 
   /**
    * Alias for this.item.type
    */
-  public get type(): BggThingType | undefined {
+  public get type(): BggThingType {
     return this.item?.type as BggThingType;
   }
 

@@ -15,8 +15,8 @@ describe('parseBggXmlApi2SearchResponse', () => {
 
       // Assert
       expect(bggResponse).toBeDefined();
-      expect(bggResponse.total).toEqual(66);
-      expect(bggResponse.items.length).toEqual(66);
+      expect(bggResponse.total).toEqual(67);
+      expect(bggResponse.items.length).toEqual(67);
     });
 
     it('should get by string', async () => {

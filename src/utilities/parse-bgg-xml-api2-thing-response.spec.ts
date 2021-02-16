@@ -6,7 +6,7 @@ import { xml2js } from 'xml-js';
 const getBggUrl = (id: number | string) => `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
 
 describe('parseBggXmlApi2ThingResponse', () => {
-  it('sandbox', async () => {
+  it.skip('sandbox', async () => {
     // Arrange
     const bggId = '170416,169786';
     const response = await axios.get(getBggUrl(bggId));
@@ -20,6 +20,23 @@ describe('parseBggXmlApi2ThingResponse', () => {
     expect(bggResponse).toBeInstanceOf(BggThingResponse);
     expect(bggResponse?.type).toEqual('boardgame');
     expect(bggResponse?.item).toBeInstanceOf(BggGame);
+  });
+
+  it('multiple things', async () => {
+    // Arrange
+    const bggId = '170416,234757';
+    const response = await axios.get(getBggUrl(bggId));
+
+    // Act
+    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
+
+    // Assert
+    expect(bggResponse).toBeDefined();
+    expect(bggResponse).toBeInstanceOf(BggThingResponse);
+    expect(bggResponse?.items[0].type).toEqual('boardgame');
+    expect(bggResponse?.items[0]).toBeInstanceOf(BggGame);
+    expect(bggResponse?.items[1].type).toEqual('boardgameexpansion');
+    expect(bggResponse?.items[1]).toBeInstanceOf(BggExpansion);
   });
 
   it('board game', async () => {
