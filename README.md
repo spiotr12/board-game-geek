@@ -31,3 +31,9 @@ const search = bggResponse.items;
 ```
 
 The `thing` can be of 3 different types: `BggGame`, `BggExpansion`, `BggAccessory`.
+
+## Donate / Support
+
+If you like my work, feel free to support it. Donations to the project are always welcome :)
+
+PayPal: [`PayPal.Me/piotrstarzec`](https://paypal.me/piotrstarzec)
