@@ -4,10 +4,10 @@ import { BggThingResponse, IBggThingResponse } from '../models';
 /**
  * Parses the http response body from BGG XML API 2
  *
- * @param response
+ * @param responseBody
  */
-export const parseBggXmlApi2ThingResponse: (response: string) => BggThingResponse | null = (response: string) => {
-  const data = xml2js(response, { compact: true }) as IBggThingResponse;
+export const parseBggXmlApi2ThingResponse: (responseBody: string) => BggThingResponse | null = (responseBody: string) => {
+  const data = xml2js(responseBody, { compact: true }) as IBggThingResponse;
   if (!data.items.item) {
     return null; // Not found
   }

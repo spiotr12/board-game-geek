@@ -1,19 +1,23 @@
 import axios from 'axios';
 import { parseBggXmlApi2ThingResponse } from './parse-bgg-xml-api2-thing-response';
-import { BggAccessory, BggExpansion, BggGame, BggThingResponse } from '@bgg/models';
-import { xml2js } from 'xml-js';
+import {
+  BggAccessory,
+  BggExpansion,
+  BggGame,
+  BggThingResponse,
+} from '@bgg/models';
 
-const getBggUrl = (id: number | string) => `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
+const getBggUrl = (id: number | string) =>
+  `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
 
 describe('parseBggXmlApi2ThingResponse', () => {
   it.skip('sandbox', async () => {
     // Arrange
     const bggId = '170416,169786';
-    const response = await axios.get(getBggUrl(bggId));
+    const { data }  = await axios.get(getBggUrl(bggId));
 
     // Act
-    const data = xml2js(response.data, { compact: true });
-    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -25,10 +29,10 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it('multiple things', async () => {
     // Arrange
     const bggId = '170416,234757';
-    const response = await axios.get(getBggUrl(bggId));
+    const { data }  = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -42,10 +46,10 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it('board game', async () => {
     // Arrange
     const bggId = 169786; //  Scythe
-    const response = await axios.get(getBggUrl(bggId));
+    const { data }  = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -117,16 +121,15 @@ describe('parseBggXmlApi2ThingResponse', () => {
     expect(version?.publishers.length).toBeGreaterThan(0);
     expect(version?.languages).not.toBeUndefined();
     expect(version?.languages.length).toBeGreaterThan(0);
-
   });
 
   it('board game expansion', async () => {
     // Arrange
     const bggId = 223555; // Scythe - The Wind Gambit
-    const response = await axios.get(getBggUrl(bggId));
+    const { data }  = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -202,10 +205,10 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it('board game accessory', async () => {
     // Arrange
     const bggId = 238417; // Scythe - Realistic Resource Tokens
-    const response = await axios.get(getBggUrl(bggId));
+    const { data }  = await axios.get(getBggUrl(bggId));
 
     // Act
-    const bggResponse = parseBggXmlApi2ThingResponse(response.data);
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
 
     // Assert
     expect(bggResponse).toBeDefined();
@@ -252,11 +255,11 @@ describe('parseBggXmlApi2ThingResponse', () => {
   //
   //     it(`test id ${id}`, async () => {
   //       // Arrange
-  //       const response = await axios.get(getBggUrl(id));
+  //       const { data }  = await axios.get(getBggUrl(id));
   //
   //       try {
   //         // Act
-  //         const bggResponse = parseBggXmlApi2ThingResponse(response.data);
+  //         const bggResponse = parseBggXmlApi2ThingResponse(data);
   //         console.log(bggResponse);
   //
   //         // Assert
