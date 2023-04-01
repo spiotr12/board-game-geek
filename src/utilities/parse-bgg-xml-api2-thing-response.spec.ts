@@ -123,6 +123,43 @@ describe('parseBggXmlApi2ThingResponse', () => {
     expect(version?.languages.length).toBeGreaterThan(0);
   });
 
+  it('board game with non-standard thumbnail', async () => {
+    // Arrange
+    const bggId = 68448; // 7 Wonders
+    const { data } = await axios.get(getBggUrl(bggId));
+
+    // Act
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
+
+    // Assert
+    expect(bggResponse).toBeDefined();
+    expect(bggResponse).toBeInstanceOf(BggThingResponse);
+    expect(bggResponse?.type).toEqual('boardgame');
+    expect(bggResponse?.item).toBeInstanceOf(BggGame);
+    // Test BggGame Model
+    const game = bggResponse?.item as BggGame;
+    expect(game?.thumbnail).not.toBeUndefined();
+  });
+
+  it('unreleased board game without versions', async () => {
+    // Arrange
+    const bggId = 38034; // A Song of Ice and Fire: The Adventure Game
+    const { data } = await axios.get(getBggUrl(bggId));
+
+    // Act
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
+
+    // Assert
+    expect(bggResponse).toBeDefined();
+    expect(bggResponse).toBeInstanceOf(BggThingResponse);
+    expect(bggResponse?.type).toEqual('boardgame');
+    expect(bggResponse?.item).toBeInstanceOf(BggGame);
+    // Test BggGame Model
+    const game = bggResponse?.item as BggGame;
+    expect(game?.versions).not.toBeUndefined();
+    expect(game?.versions.length).toEqual(0);
+  });
+
   it('board game expansion', async () => {
     // Arrange
     const bggId = 223555; // Scythe - The Wind Gambit
