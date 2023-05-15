@@ -4,6 +4,7 @@ import { BggVersion, IBggVersion } from './bgg-version.model';
 import { IBggThingAttributes } from './bgg-thing-attributes.interface';
 import { BggLink, BggLinkType, IBggLink } from './bgg-link.model';
 import { BggName, BggNameType, IBggName } from './bgg-name.model';
+import { BggRatings, IBggRatings } from './bgg-ratings.model';
 
 export interface IBggGame extends IAttributes<IBggThingAttributes> {
   thumbnail: { _text: string };
@@ -20,6 +21,7 @@ export interface IBggGame extends IAttributes<IBggThingAttributes> {
   minage: IAttributes<{ value: string }>;
   link: IBggLink[] | IBggLink;
   versions: { item: IBggVersion[] | IBggVersion }
+  statistics?: { ratings: IBggRatings }
 }
 
 /**
@@ -42,6 +44,7 @@ export class BggGame {
   public maxplaytime: number;
   public minage: number;
   public versions: BggVersion[];
+  public ratings?: BggRatings;
 
   // Getters
 
@@ -110,5 +113,6 @@ export class BggGame {
       : data.versions.item
       ? [new BggVersion(data.versions.item)]
       : [];
+    this.ratings = data.statistics?.ratings ? new BggRatings(data.statistics.ratings): undefined;
   }
 }

@@ -13,6 +13,14 @@ const bggResponse = parseBggXmlApi2ThingResponse(data);
 const thing = bggResponse.item;
 ```
 
+### Thing with ranking and rating stats
+
+```typescript
+const { data } = await axios.get('https://api.geekdo.com/xmlapi2/thing?id=169786&versions=1&stats=1');
+const bggResponse = parseBggXmlApi2ThingResponse(data);
+const thing = bggResponse.item;
+```
+
 You can also get multiple things
 
 ```typescript
@@ -55,30 +63,28 @@ const bulkFetchingExample = async () => {
 
   for (const gameName of gameNames) {
     try {
-      {
-        // Get Search result
-        const searchResponse = await axios.get(`https://api.geekdo.com/xmlapi2/search?query=${gameName}`);
-        const searchBggResponse = parseBggXmlApi2SearchResponse(searchResponse.data);
-        const searchResult = searchBggResponse?.items;
+      // Get Search result
+      const searchResponse = await axios.get(`https://api.geekdo.com/xmlapi2/search?query=${gameName}`);
+      const searchBggResponse = parseBggXmlApi2SearchResponse(searchResponse.data);
+      const searchResult = searchBggResponse?.items;
 
-        if (!searchResult.length) {
-          throw new Error('No results found.');
-        }
-
-        const bggThingId = searchResult[0].id;
-
-        // Get Thing result (using `id` from previously fetched Search result)
-        const thingResponse = await axios.get(
-          `https://api.geekdo.com/xmlapi2/thing?id=${bggThingId}&versions=1`,
-        );
-        const thingBggResponse = parseBggXmlApi2ThingResponse(thingResponse.data);
-        const bggThing = thingBggResponse?.item;
-
-        results.push(bggThing);
-
-        // Slow iteration because of API request limit
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+      if (!searchResult.length) {
+        throw new Error('No results found.');
       }
+
+      const bggThingId = searchResult[0].id;
+
+      // Get Thing result (using `id` from previously fetched Search result)
+      const thingResponse = await axios.get(
+        `https://api.geekdo.com/xmlapi2/thing?id=${bggThingId}&versions=1`,
+      );
+      const thingBggResponse = parseBggXmlApi2ThingResponse(thingResponse.data);
+      const bggThing = thingBggResponse?.item;
+
+      results.push(bggThing);
+
+      // Slow iteration because of API request limit
+      await new Promise((resolve) => setTimeout(resolve, 5000));
     } catch (error) {
       console.error(error, gameName);
       errors.push({ gameName, error: `${error}` });
