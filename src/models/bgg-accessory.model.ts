@@ -46,8 +46,8 @@ export class BggAccessory {
   constructor(data: IBggAccessory) {
     this.id = Number.parseInt(data._attributes.id);
     this.type = data._attributes.type;
-    this.thumbnail = data.thumbnail?._text.trim();
-    this.image = data.image?._text.trim();
+    this.thumbnail = data.thumbnail?._text?.trim();
+    this.image = data.image?._text?.trim();
     this.links = Array.isArray(data.link)
       ? data.link.map(link => new BggLink(link))
       : [new BggLink(data.link)];
@@ -55,9 +55,11 @@ export class BggAccessory {
       ? data.name.map(name => new BggName(name))
       : [new BggName(data.name)];
     this.yearpublished = data.yearpublished ? Number.parseInt(data.yearpublished._attributes.value) : undefined;
-    this.description = data.description._text.trim();
+    this.description = data.description?._text?.trim();
     this.versions = Array.isArray(data.versions.item)
-      ? data.versions.item.map(version => new BggVersion(version))
-      : [new BggVersion(data.versions.item)];
+      ? data.versions.item.map((version) => new BggVersion(version))
+      : data.versions.item
+      ? [new BggVersion(data.versions.item)]
+      : [];
   }
 }

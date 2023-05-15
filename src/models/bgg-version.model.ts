@@ -62,8 +62,8 @@ export class BggVersion {
   constructor(data: IBggVersion) {
     this.id = Number.parseInt(data._attributes.id);
     this.type = data._attributes.type;
-    this.thumbnail = data.thumbnail?._text.trim();
-    this.image = data.image?._text.trim();
+    this.thumbnail = data.thumbnail?._text?.trim();
+    this.image = data.image?._text?.trim();
     this.links = data.link
       ? Array.isArray(data.link)
         ? data.link.map(link => new BggLink(link))
