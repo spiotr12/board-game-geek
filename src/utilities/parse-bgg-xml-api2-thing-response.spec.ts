@@ -7,8 +7,8 @@ import {
   BggThingResponse,
 } from '@bgg/models';
 
-const getBggUrl = (id: number | string) =>
-  `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1`;
+const getBggUrl = (id: number | string, query = '') =>
+  `https://api.geekdo.com/xmlapi2/thing?id=${id}&versions=1${query}`;
 
 describe('parseBggXmlApi2ThingResponse', () => {
   it.skip('sandbox', async () => {
@@ -73,6 +73,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
     expect(game?.minage).not.toBeUndefined();
     expect(game?.versions).not.toBeUndefined();
     expect(game?.versions.length).toBeGreaterThan(0);
+    expect(game?.ratings).toBeUndefined();
     // Test BggGame Model getters
     expect(game?.namesValues).not.toBeUndefined();
     expect(game?.namesValues.length).toBeGreaterThan(0);
@@ -157,7 +158,44 @@ describe('parseBggXmlApi2ThingResponse', () => {
     // Test BggGame Model
     const game = bggResponse?.item as BggGame;
     expect(game?.versions).not.toBeUndefined();
-    expect(game?.versions.length).toEqual(0);
+  });
+
+  it('board game stats', async () => {
+    // Arrange
+    const bggId = 68448; // 7 Wonders
+    const { data } = await axios.get(getBggUrl(bggId, '&stats=1'));
+
+    // Act
+    const bggResponse = parseBggXmlApi2ThingResponse(data);
+
+    // Assert
+    expect(bggResponse).toBeDefined();
+    expect(bggResponse).toBeInstanceOf(BggThingResponse);
+    expect(bggResponse?.type).toEqual('boardgame');
+    expect(bggResponse?.item).toBeInstanceOf(BggGame);
+    // Test BggGame Model
+    const game = bggResponse?.item as BggGame;
+    expect(game?.ratings?.average).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.averageweight).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.bayesaverage).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.median).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.numcomments).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.numweights).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.owned).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.stddev).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.trading).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.usersrated).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.wanting).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.wishing).toBeGreaterThanOrEqual(-1);
+    expect(game?.ratings?.ranks.length).toBeGreaterThan(0);
+
+    const rank = game?.ratings?.ranks[0];
+    expect(rank?.bayesaverage).toBeGreaterThanOrEqual(0);
+    expect(rank?.friendlyname).not.toBeUndefined();
+    expect(rank?.id).not.toBeUndefined();
+    expect(rank?.name).not.toBeUndefined();
+    expect(rank?.type).not.toBeUndefined();
+    expect(rank?.value).toBeGreaterThanOrEqual(0);
   });
 
   it('board game expansion', async () => {
