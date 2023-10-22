@@ -1,5 +1,5 @@
 import { IAttributes } from './attributes.interface';
-import { BggCollectionItem, IBggCollectionItem } from './bgg-collection-model';
+import { BggCollectionItem, IBggCollectionItem } from './bgg-collection.model';
 
 export interface IBggCollectionResponse {
   _declaration: IAttributes<{
