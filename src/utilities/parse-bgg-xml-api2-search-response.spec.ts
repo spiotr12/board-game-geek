@@ -16,13 +16,13 @@ describe('parseBggXmlApi2SearchResponse', () => {
 
       // Assert
       expect(bggResponse).toBeDefined();
-      expect(bggResponse.total).toEqual(72);
-      expect(bggResponse.items.length).toEqual(72);
+      expect(bggResponse.total).toEqual(75);
+      expect(bggResponse.items.length).toEqual(75);
     });
 
     it('should get by string', async () => {
       // Arrange
-      const { data }  = await axios.get(searchBggUrl('igrajac+z+wiatrem'));
+      const { data } = await axios.get(searchBggUrl('igrajac+z+wiatrem'));
 
       // Act
       const bggResponse = parseBggXmlApi2SearchResponse(data);
@@ -33,7 +33,7 @@ describe('parseBggXmlApi2SearchResponse', () => {
 
     it('should get by string and type', async () => {
       // Arrange
-      const { data }  = await axios.get(searchBggUrl(`igrajac+z+wiatrem&type=${BggThingType.boardGameExpansion}`));
+      const { data } = await axios.get(searchBggUrl(`igrajac+z+wiatrem&type=${BggThingType.boardGameExpansion}`));
 
       // Act
       const bggResponse = parseBggXmlApi2SearchResponse(data);
@@ -44,7 +44,7 @@ describe('parseBggXmlApi2SearchResponse', () => {
 
     it('should get by string exactly one', async () => {
       // Arrange
-      const { data }  = await axios.get(
+      const { data } = await axios.get(
         searchBggUrl(`igrajac+z+wiatrem&exact=1`)
       );
 
