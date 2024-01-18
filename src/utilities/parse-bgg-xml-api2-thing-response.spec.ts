@@ -14,7 +14,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it.skip('sandbox', async () => {
     // Arrange
     const bggId = '170416,169786';
-    const { data }  = await axios.get(getBggUrl(bggId));
+    const { data } = await axios.get(getBggUrl(bggId));
 
     // Act
     const bggResponse = parseBggXmlApi2ThingResponse(data);
@@ -29,7 +29,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it('multiple things', async () => {
     // Arrange
     const bggId = '170416,234757';
-    const { data }  = await axios.get(getBggUrl(bggId));
+    const { data } = await axios.get(getBggUrl(bggId));
 
     // Act
     const bggResponse = parseBggXmlApi2ThingResponse(data);
@@ -46,7 +46,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it('board game', async () => {
     // Arrange
     const bggId = 169786; //  Scythe
-    const { data }  = await axios.get(getBggUrl(bggId));
+    const { data } = await axios.get(getBggUrl(bggId));
 
     // Act
     const bggResponse = parseBggXmlApi2ThingResponse(data);
@@ -201,7 +201,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it('board game expansion', async () => {
     // Arrange
     const bggId = 223555; // Scythe - The Wind Gambit
-    const { data }  = await axios.get(getBggUrl(bggId));
+    const { data } = await axios.get(getBggUrl(bggId));
 
     // Act
     const bggResponse = parseBggXmlApi2ThingResponse(data);
@@ -280,7 +280,7 @@ describe('parseBggXmlApi2ThingResponse', () => {
   it('board game accessory', async () => {
     // Arrange
     const bggId = 238417; // Scythe - Realistic Resource Tokens
-    const { data }  = await axios.get(getBggUrl(bggId));
+    const { data } = await axios.get(getBggUrl(bggId));
 
     // Act
     const bggResponse = parseBggXmlApi2ThingResponse(data);
