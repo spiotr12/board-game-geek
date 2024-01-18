@@ -40,6 +40,19 @@ const search = bggResponse.items;
 
 The `thing` can be of 3 different types: `BggGame`, `BggExpansion`, `BggAccessory`.
 
+### Collection with rating stats
+
+```typescript
+const { data } = await axios.get('https://api.geekdo.com/xmlapi2/collection?username=spiotr12&stats=1&brief=1');
+const bggResponse = parseBggXmlApi2CollectionResponse(data);
+const collection = bggResponse.items;
+```
+
+Implementation notes:
+
+1. Currently only abbreviated results are parsed. Use parameter `brief=1` in URL for lower response time (additional information are ignored anyway)
+2. API for collection initially returns status code `202` (and queue your request), so you need to send another delayed requests until the status is not `202` - see example below.
+
 ## Examples
 
 ### Get Thing using simple Fetch API
@@ -94,6 +107,25 @@ const bulkFetchingExample = async () => {
   return { results, errors };
 };
 
+```
+
+### Get Collection using recursive fetching
+
+```typescript
+const fetchCollection = async () => {
+  const response = await axios.get('https://api.geekdo.com/xmlapi2/collection?username=spiotr12&stats=1&brief=1');
+
+  if (response.status === 202) {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    return fetchCollection(username);
+  }
+
+  return response;
+};
+
+const { data } = await fetchCollection(username);
+const bggResponse = parseBggXmlApi2CollectionResponse(data);
+const collection = bggResponse.items;
 ```
 
 ## Donate / Support

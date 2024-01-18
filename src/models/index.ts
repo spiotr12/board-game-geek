@@ -1,5 +1,7 @@
 export * from './attributes.interface';
 export * from './bgg-accessory.model';
+export * from './bgg-collection-response.model';
+export * from './bgg-collection.model';
 export * from './bgg-expansion.model';
 export * from './bgg-game.model';
 export * from './bgg-link.model';
